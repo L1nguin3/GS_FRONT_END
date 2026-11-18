@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,48 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    
+    <header class="cabecalho">
+        <div class="container navegacao">
+            <a class="marca" href="#inicio" aria-label="RAIZ - início">
+                <img src="img/raiz.svg" alt="Ícone RAIZ: uma folha dentro de um círculo">
+                <span>RAIZ<span class="ponto">.</span></span>
+            </a>
+
+            <nav aria-label="Navegação principal">
+                <ul class="menu">
+                    <li><a href="#problema">Problema</a></li>
+                    <li><a href="#tecnologia">Tecnologia</a></li>
+                    <li><a href="#objetivos">Objetivos</a></li>
+                    <li><a href="#publico-alvo">Público-alvo</a></li>
+                    <li><a href="#beneficios">Benefícios</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="inicio">
+        <section class="destaque">
+            <div class="container destaque-conteudo">
+                <div class="destaque-texto">
+                    <span class="etiqueta">Tecnologia que cultiva o futuro</span>
+                    <h1>Mais cuidado com a água. Mais força para cultivar.</h1>
+                    <p>RAIZ conecta tecnologia e cultivo para apoiar decisões conscientes sobre a irrigação.</p>
+                    <a class="botao" href="#tecnologia">Conheça a solução <span aria-hidden="true">→</span></a>
+                </div>
+                <div class="destaque-imagem">
+                    <img src="img/cultivo.jpg"
+                        alt="Ilustração de uma planta crescendo em solo monitorado por um sensor">
+                </div>
+            </div>
+        </section>
 </body>
+
 </html>

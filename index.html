@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/carousel.css">
+    <link rel="stylesheet" href="css/temperature.css">
 </head>
 
 <body>
@@ -31,6 +32,7 @@
                     <li><a href="#objetivos">Objetivos</a></li>
                     <li><a href="#publico-alvo">Público-alvo</a></li>
                     <li><a href="#beneficios">Benefícios</a></li>
+                    <li><a href="#clima">Clima</a></li>
                 </ul>
             </nav>
         </div>
@@ -147,6 +149,58 @@
                 </div>
             </div>
         </section>
+        <section class="weather-section" id="clima">
+            <div class="weather-container" aria-label="Clima e Secagem do Solo">
+                <div class="weather-info">
+                    <h2 class="weather-info-title">Clima</h2>
+                    <p class="weather-info-text">
+                        A secagem do solo depende diretamente do equilíbrio entre a água que entra e a taxa de evaporação na superfície. Temperaturas mais altas e maior radiação solar aceleram a evaporação da umidade retida entre as partículas, enquanto dias nublados ou chuvosos mantêm o solo encharcado por mais tempo.
+                    </p>
+                    <p class="weather-info-highlight">
+                        O vento também cumpre papel decisivo ao remover o ar úmido logo acima da superfície, renovando o contato com o ar mais seco e tornando a perda de umidade mais rápida.
+                    </p>
+                </div>
+
+                <!-- Div da Direita: Busca com Autocomplete + Card Interativo -->
+                <div class="weather-widget-col">
+                    <div class="search-wrapper">
+                        <input 
+                        type="text" 
+                        id="cityInput" 
+                        class="search-input" 
+                        placeholder="Digite o nome de uma cidade..." 
+                        autocomplete="off"
+                        >
+                        <ul id="suggestionsList" class="suggestions-list"></ul>
+                    </div>
+
+                    <div class="weather-card period-day" id="weatherCard">
+                        <div class="weather-fx-layer" id="fxLayer"></div>
+
+                        <div class="weather-content">
+                            <div class="weather-header">
+                                <div>
+                                <h3 class="city-name" id="cityName">São Paulo</h3>
+                                <p class="city-country" id="cityCountry">Brasil</p>
+                                </div>
+                                <span class="weather-badge" id="weatherCondition">Carregando...</span>
+                            </div>
+
+                            <div class="weather-main">
+                                <div class="temperature" id="temperature">--°</div>
+                                <div class="weather-details">
+                                <div id="feelsLike">Sensação: --°</div>
+                                <div id="windSpeed">Vento: -- km/h</div>
+                                <div id="soilMoisture">Umidade do solo: --%</div>
+                                </div>
+                            </div>
+
+                            <p class="weather-tip" id="weatherTip">Buscando condições atmosféricas...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <footer class="rodape">
             <div class="container rodape-conteudo">
@@ -184,6 +238,7 @@
     </main>
     <script src="js/script.js"></script>
     <script src="js/carousel.js"></script>
+    <script src="js/temperature.js"></script>
 </body>
 
 </html>

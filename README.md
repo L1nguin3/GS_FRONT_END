@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="img/mascote/02-solo-ok.svg" alt="Mascote do RAIZ, um broto sorridente" width="100">
+  <img src="img/logo.svg" alt="Logo RAIZ: broto de duas folhas dentro de um círculo verde-claro" width="100">
 </p>
 
 <h1 align="center">RAIZ</h1>

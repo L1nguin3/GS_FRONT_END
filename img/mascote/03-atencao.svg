@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Mascote RAIZ atenção</title>
+  <desc id="desc">Broto antropomórfico em alerta leve, com uma folha apontando para cima.</desc>
+  <circle cx="256" cy="258" r="216" fill="#F8F8F1" stroke="#9A6A3C" stroke-width="12"/>
+  <g stroke="#9A6A3C" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path fill="#28745A" d="M250 142C191 144 139 111 130 55c58-3 109 27 128 80 22-52 76-78 133-70-14 55-68 84-126 78z"/>
+    <path fill="#28745A" d="M202 307c-49 2-93-22-113-65 47-14 94 3 124 41z"/>
+    <path fill="#74AB8D" d="M309 287c21-45 61-76 107-79 4 50-22 92-70 113z"/>
+    <path fill="#28745A" d="M256 132c67 0 111 46 105 108-3 32-19 58-43 74l15 130c3 25-16 44-41 44h-72c-25 0-44-19-41-44l15-130c-24-16-40-42-43-74-6-62 38-108 105-108z"/>
+  </g>
+  <g fill="#173F35"><circle cx="220" cy="231" r="11"/><circle cx="292" cy="231" r="11"/></g>
+  <path d="M229 270c17-8 37-8 54 0" fill="none" stroke="#173F35" stroke-width="10" stroke-linecap="round"/>
+  <path d="M302 192l14-9" fill="none" stroke="#173F35" stroke-width="8" stroke-linecap="round"/>
+</svg>

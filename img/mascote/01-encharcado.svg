@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Mascote RAIZ encharcado</title>
+  <desc id="desc">Broto antropomórfico pingando água, com expressão de desconforto e folhas murchas.</desc>
+  <circle cx="256" cy="258" r="216" fill="#E9F2EC" stroke="#1D5F7A" stroke-width="12"/>
+  <g stroke="#1D5F7A" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path fill="#28745A" d="M247 142C189 148 137 119 124 65c56-7 109 19 132 69 18-49 69-78 126-74-9 55-59 89-116 84z"/>
+    <path fill="#28745A" d="M204 293c-47-4-88 20-104 62 48 12 93-4 121-42z"/>
+    <path fill="#74AB8D" d="M308 292c49 0 91 27 104 71-50 8-95-12-120-52z"/>
+    <path fill="#28745A" d="M256 132c67 0 111 46 105 108-3 32-19 58-43 74l15 130c3 25-16 44-41 44h-72c-25 0-44-19-41-44l15-130c-24-16-40-42-43-74-6-62 38-108 105-108z"/>
+  </g>
+  <g fill="#173F35">
+    <ellipse cx="220" cy="231" rx="10" ry="15"/><ellipse cx="292" cy="231" rx="10" ry="15"/>
+  </g>
+  <path d="M222 277c10-13 22-18 34-18s24 5 34 18" fill="none" stroke="#173F35" stroke-width="12" stroke-linecap="round"/>
+  <g fill="#74AB8D" stroke="#173F35" stroke-width="7">
+    <path d="M103 384c15 20 15 37 0 50-15-13-15-30 0-50z"/><path d="M415 389c15 20 15 37 0 50-15-13-15-30 0-50z"/>
+  </g>
+</svg>

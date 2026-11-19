@@ -28,7 +28,10 @@ O projeto se conecta às ODS **2** (Fome zero), **9** (Indústria, inovação e 
 
 ## MVP simulado
 
-Além da landing page, o RAIZ tem um **protótipo navegável do aplicativo**, publicado como subdomínio do site. Ele mostra como o produtor usaria o RAIZ no dia a dia.
+Além da landing page, o RAIZ tem um **protótipo navegável do aplicativo**, publicado em um projeto separado na Vercel. Ele mostra como o produtor usaria o RAIZ no dia a dia.
+
+**Site:** https://raiz-site-eta.vercel.app  
+**App:** https://raiz-app-three.vercel.app
 
 > **Protótipo simulado gerado com inteligência artificial.** Os dados são fictícios e não vêm de um sensor real. O aviso aparece em todas as telas.
 
@@ -36,7 +39,7 @@ Além da landing page, o RAIZ tem um **protótipo navegável do aplicativo**, pu
 | --- | --- |
 | **Início** | Umidade atual em número grande, o estado em uma palavra, o mascote e em quantas horas irrigar |
 | **Canteiros** | Alface, rúcula e couve, cada um com número, estado, ícone e mascote |
-| **Histórico** | Gráfico das últimas 24 horas, com rótulos escritos |
+| **Histórico** | Resumo simples das últimas 24 horas e, se a pessoa quiser, o gráfico técnico |
 | **Ajuda** | Contato com a cooperativa e a Casa da Agricultura, e explicação do mascote |
 
 **Os quatro caminhos da acessibilidade, ao mesmo tempo:**
@@ -71,6 +74,7 @@ GS_FRONT_END/
 ├── index.html       # página principal
 ├── css/styles.css   # estilos
 ├── js/script.js     # função enviarFeedback()
+├── app/             # MVP simulado do aplicativo
 ├── img/             # imagens das seções
 │   └── mascote/     # as cinco expressões do mascote
 ├── docs/            # print da home usado no README
@@ -84,7 +88,7 @@ GS_FRONT_END/
    ```bash
    git clone https://github.com/L1nguin3/GS_FRONT_END.git
    ```
-2. Abra o arquivo `index.html` no navegador.
+2. Abra o arquivo `index.html` no navegador. O app fica em `app/index.html`.
 
 Não é preciso instalar nada.
 

@@ -40,16 +40,20 @@
   height: 380px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
   transition: 
     transform var(--transition-speed) cubic-bezier(0.25, 1, 0.5, 1),
     opacity var(--transition-speed) ease,
-    filter var(--transition-speed) ease;
+    filter var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
   
   opacity: 0;
   transform: translateX(0) scale(0.6);
   z-index: 1;
   pointer-events: none;
+}
+
+.carousel-slide.active {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
 .carousel-slide img {

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/logo.png" alt="Logo do RAIZ" width="100">
+  <img src="img/mascote/02-solo-ok.svg" alt="Mascote do RAIZ, um broto sorridente" width="100">
 </p>
 
 <h1 align="center">RAIZ</h1>
@@ -8,7 +8,7 @@
 
 Landing page do **Projeto RAIZ**, desenvolvida pelo grupo **SONDER** para a Global Solution 2026.2 da FIAP (tema CitizenTech).
 
-![Página inicial do RAIZ](docs/home.png)
+![Página inicial do RAIZ](docs/home.jpg)
 
 ## Sobre o projeto
 
@@ -23,6 +23,7 @@ O projeto se conecta às ODS **2** (Fome zero), **9** (Indústria, inovação e 
 - **Objetivos**: o que o RAIZ quer alcançar
 - **Público-alvo**: quem o projeto atende
 - **Benefícios**: o ganho para o produtor
+- **Acessibilidade**: quatro caminhos para a mesma informação (interface facilitada, voz, mascote e suporte humano)
 - **Feedback**: formulário para o visitante deixar sua opinião
 
 ## Tecnologias
@@ -39,7 +40,8 @@ GS_FRONT_END/
 ├── css/styles.css   # estilos
 ├── js/script.js     # função enviarFeedback()
 ├── img/             # imagens das seções
-├── docs/            # logo e print usados no README
+│   └── mascote/     # as cinco expressões do mascote
+├── docs/            # print da home usado no README
 ├── ia.md            # declaração de uso de IA
 └── INTEGRANTES.md
 ```

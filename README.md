@@ -18,6 +18,7 @@ O projeto se conecta às ODS **2** (Fome zero), **9** (Indústria, inovação e 
 
 ## Seções da página
 
+- **Galeria**: carrossel com fotos de cultivo
 - **Problema**: o desafio de irrigar sem desperdício
 - **Tecnologia**: como o sensor e o app funcionam
 - **Objetivos**: o que o RAIZ quer alcançar
@@ -65,24 +66,39 @@ O protótipo segue a mesma identidade visual da landing page. Um botão "Simular
 
 - **HTML5**: estrutura semântica (`header`, `main`, `section`, `footer`)
 - **CSS3**: variáveis, Flexbox, `clamp()`, `position: sticky` e layout responsivo com `@media`
-- **JavaScript**: validação e envio do formulário de feedback
+- **JavaScript**: validação do formulário de feedback, carrossel de imagens e, no app, troca de telas e simulação das leituras
+- **Web Speech API**: leitura por voz no app (`speechSynthesis`, em português)
+- **Vercel**: hospedagem do site e do app em dois projetos separados
 
 ## Estrutura
 
 ```
 GS_FRONT_END/
 ├── index.html       # página principal
-├── css/styles.css   # estilos
-├── js/script.js     # função enviarFeedback()
-├── app/             # MVP simulado do aplicativo
-├── img/             # imagens das seções
+├── css/
+│   ├── styles.css   # estilos da página
+│   └── carousel.css # estilos do carrossel
+├── js/
+│   ├── script.js    # função enviarFeedback()
+│   └── carousel.js  # carrossel de imagens
+├── app/
+│   ├── index.html   # MVP simulado do aplicativo
+│   └── favicon.svg  # ícone do app (mascote Solo ok)
+├── img/             # imagens, logo e mascotes
 │   └── mascote/     # as cinco expressões do mascote
 ├── docs/            # print da home usado no README
 ├── ia.md            # declaração de uso de IA
 └── INTEGRANTES.md
 ```
 
-## Como executar
+## Como acessar
+
+O projeto está publicado:
+
+- **Site:** https://raiz-sonder.vercel.app
+- **App (MVP simulado):** https://raiz-sonder-app.vercel.app
+
+Para rodar no computador:
 
 1. Clone o repositório:
    ```bash
@@ -104,7 +120,7 @@ Não é preciso instalar nada.
 
 ## Uso de IA
 
-Veja como o grupo usou IA como ferramenta de estudo em [ia.md](ia.md).
+O grupo usou IA como ferramenta de estudo, e o MVP simulado foi gerado com IA a partir das nossas instruções. Os detalhes estão em [ia.md](ia.md).
 
 ---
 

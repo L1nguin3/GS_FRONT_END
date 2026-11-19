@@ -41,7 +41,7 @@ Aprendemos CSS com a IA e aplicamos os conceitos na landing page, ajustando tudo
 | `clamp()` e `min()` | Título principal e largura do container | Tamanhos que se adaptam à tela sem várias regras |
 | `position: sticky` | Cabeçalho fixo no topo | Manter a navegação sempre visível |
 | `@media` (820px e 600px) | Menu, destaque e seções no celular | Reorganizar o layout em telas menores |
-| `:focus-visible` | Links usados pelo teclado | Deixar o foco visível, pensando em acessibilidade |
+| `:focus-visible` | Links, botão e campos usados pelo teclado | Deixar o foco visível, pensando em acessibilidade |
 | `transition` e `:hover` | Botões e links do menu | Dar retorno visual ao passar o mouse |
 
 ## JavaScript: formulário de feedback e carrossel
@@ -56,6 +56,22 @@ O que entendemos de cada parte:
 - O `alert` final usa o nome digitado para personalizar a resposta.
 - O `reset()` limpa o formulário depois do envio.
 - O `setInterval()` define que uma função seja repetida em um intervalo definido em milisegundos.
+
+## Acessibilidade: seção "Quatro caminhos para a mesma informação"
+
+O briefing pede para considerar quem pode ter dificuldade para acessar a solução. Como parte de quem planta é analfabeta ou lê com dificuldade, o grupo decidiu o conteúdo da seção: quatro caminhos que existem ao mesmo tempo (interface facilitada, dados por voz, mascote interativo e suporte por equipe). As ilustrações do mascote, com as cinco expressões do estado do solo, foram feitas por nós.
+
+Usamos a IA para tirar dúvidas sobre como deixar a seção acessível e para revisar o HTML e o CSS. A tabela mostra o que aplicamos.
+
+| Critério | Como aplicamos | O que aprendemos |
+| --- | --- | --- |
+| Texto alternativo (`alt` e `aria-label`) | Cada ícone e cada expressão do mascote | Descrever o que a imagem mostra, e não escrever só "ícone" |
+| Contraste | Texto na cor `--texto` e ícones em `--verde-escuro` sobre `--verde-claro` | O texto precisa de contraste mínimo de 4.5:1 e os ícones, de 3:1 |
+| Informação além da cor | Cada expressão do mascote tem legenda escrita | Quem não enxerga bem a cor ainda entende o estado do solo |
+| Tamanho do texto | Nenhum texto da seção abaixo de 15 px | Texto pequeno demais atrapalha quem lê com dificuldade |
+| `:focus-visible` | Links, botão e campos do formulário | Quem usa o teclado precisa ver onde está o foco |
+| Ordem de leitura | A ordem do HTML segue a ordem que aparece na tela | Leitores de tela leem na ordem do código |
+| CSS Grid com `auto-fit` | Cartões em 2×2 que viram 1 coluna e mascotes que quebram linha | Organizar em grade sem que os textos se sobreponham |
 
 ## Nossa responsabilidade
 

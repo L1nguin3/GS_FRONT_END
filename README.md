@@ -30,8 +30,8 @@ O projeto se conecta às ODS **2** (Fome zero), **9** (Indústria, inovação e 
 
 Além da landing page, o RAIZ tem um **protótipo navegável do aplicativo**, publicado em um projeto separado na Vercel. Ele mostra como o produtor usaria o RAIZ no dia a dia.
 
-**Site:** https://raiz-site-eta.vercel.app  
-**App:** https://raiz-app-three.vercel.app
+**Site:** https://raiz-sonder.vercel.app  
+**App:** https://raiz-sonder-app.vercel.app
 
 > **Protótipo simulado gerado com inteligência artificial.** Os dados são fictícios e não vêm de um sensor real. O aviso aparece em todas as telas.
 

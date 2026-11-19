@@ -326,9 +326,9 @@ h2 {
 }
 
 .feedback {
-    padding-top: 2rem;
+    padding-top: 3rem;
     padding-bottom: 2.5rem;
-    border-top: 1px solid #315047;
+    border-bottom: 1px solid #315047;
 }
 
 .feedback h2 {

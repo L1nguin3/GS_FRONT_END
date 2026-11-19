@@ -248,9 +248,7 @@ h2 {
     line-height: 1.7;
 }
 
-/* =========================
-   ODS
-========================= */
+
 .ods {
     padding: 3.5rem 0;
     background: var(--verde-escuro);
@@ -289,11 +287,7 @@ h2 {
     font-weight: 700;
 }
 
-/* =========================
-   RODAPÉ
-========================= */
 
-/* RODAPÉ */
 .rodape {
     background: #102e27;
     color: #e5eee8;
@@ -331,7 +325,6 @@ h2 {
     text-decoration: none;
 }
 
-/* SEÇÃO DE FEEDBACK */
 .feedback {
     padding-top: 2rem;
     padding-bottom: 2.5rem;
@@ -405,10 +398,6 @@ h2 {
     background: #a8d2b2;
 }
 
-
-/* =========================
-   RESPONSIVIDADE
-========================= */
 @media (max-width: 820px) {
     .navegacao {
         align-items: flex-start;

@@ -34,6 +34,12 @@ Além da landing page, o RAIZ tem um **protótipo navegável do aplicativo**, pu
 **Site:** https://raiz-sonder.vercel.app  
 **App:** https://raiz-sonder-app.vercel.app
 
+![Tela inicial do app no computador](docs/app-desktop.png)
+
+<p align="center">
+  <img src="docs/app-celular.jpg" alt="Telas Início e Canteiros do app no celular" width="620">
+</p>
+
 > **Protótipo simulado gerado com inteligência artificial.** Os dados são fictícios e não vêm de um sensor real. O aviso aparece em todas as telas.
 
 | Tela | O que mostra |
@@ -86,7 +92,7 @@ GS_FRONT_END/
 │   └── favicon.svg  # ícone do app (mascote Solo ok)
 ├── img/             # imagens, logo e mascotes
 │   └── mascote/     # as cinco expressões do mascote
-├── docs/            # print da home usado no README
+├── docs/            # prints do site e do app usados no README
 ├── ia.md            # declaração de uso de IA
 └── INTEGRANTES.md
 ```

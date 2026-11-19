@@ -154,7 +154,7 @@ h1 {
 .botao {
     display: inline-flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.6rem;
     margin-top: 1.8rem;
     padding: 0.9rem 1.35rem;
     border-radius: 8px;
@@ -571,4 +571,10 @@ button:focus-visible,
     border-color: var(--verde-escuro);
     background: var(--verde-escuro);
     color: var(--branco);
+}
+
+.botao-icone {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }

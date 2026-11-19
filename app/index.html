@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Protótipo simulado do aplicativo RAIZ, gerado com inteligência artificial e com dados fictícios.">
+  <meta name="theme-color" content="#173f35">
+  <title>RAIZ | Protótipo do aplicativo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde-escuro: #173f35;
+      --verde: #28745a;
+      --verde-claro: #e9f2ec;
+      --creme: #f8f8f1;
+      --branco: #ffffff;
+      --texto: #26352f;
+      --texto-suave: #617169;
+      --linha: #dce6dd;
+      --marrom-terra: #b07d4f;
+      --foco: #d18a25;
+      --estado-encharcado: #1d5f7a;
+      --estado-solo-ok: #28745a;
+      --estado-atencao: #9a6a3c;
+      --estado-irrigar: #b33a2b;
+      --estado-falha: #6c5b8f;
+      --aviso-altura: 52px;
+      --nav-altura: 78px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--branco);
+      color: var(--texto);
+      font-family: "DM Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: var(--verde); }
+    svg { display: block; max-width: 100%; }
+    [hidden] { display: none !important; }
+
+    :focus-visible {
+      outline: 3px solid var(--foco);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 0.5rem;
+      left: 0.75rem;
+      z-index: 1000;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      background: var(--branco);
+      color: var(--verde-escuro);
+      font-weight: 700;
+      transform: translateY(-160%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .prototype-notice {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      min-height: var(--aviso-altura);
+      display: grid;
+      place-items: center;
+      padding: 0.55rem 5%;
+      background: var(--creme);
+      border-bottom: 1px solid var(--linha);
+      color: var(--texto);
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .app-header {
+      position: sticky;
+      top: var(--aviso-altura);
+      z-index: 80;
+      margin-top: var(--aviso-altura);
+      background: var(--branco);
+      border-bottom: 1px solid var(--linha);
+    }
+    .container { width: min(90%, 1120px); margin-inline: auto; }
+    .header-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      gap: 0.65rem;
+      color: var(--verde-escuro);
+      text-decoration: none;
+      font-family: "Manrope", sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--verde-claro);
+    }
+    .brand-mark svg { width: 30px; height: 30px; }
+    .brand-dot { color: var(--verde); }
+    .back-site {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      font-weight: 700;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+
+    main { padding-bottom: calc(var(--nav-altura) + 1.5rem); }
+    .screen { padding: 3rem 0; }
+    .screen[hidden] { display: none; }
+    .eyebrow {
+      margin: 0 0 0.5rem;
+      color: var(--verde);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 {
+      margin-top: 0;
+      color: var(--verde-escuro);
+      font-family: "Manrope", sans-serif;
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+    h1 { margin-bottom: 0.5rem; font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -2px; }
+    h2 { font-size: clamp(1.65rem, 4vw, 2.3rem); }
+    h3 { font-size: 1.15rem; }
+    .screen-intro { margin: 0 0 2rem; color: var(--texto-suave); }
+
+    .status-card {
+      --state-color: var(--estado-atencao);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(230px, 0.95fr);
+      gap: 1.5rem;
+      align-items: center;
+      padding: clamp(1.5rem, 5vw, 3rem);
+      overflow: hidden;
+      border: 2px solid var(--state-color);
+      border-radius: 24px;
+      background: color-mix(in srgb, var(--state-color) 12%, var(--branco));
+      transition: border-color 180ms ease, background-color 180ms ease;
+    }
+    .reading-number {
+      margin: 0;
+      color: var(--state-color);
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(5.5rem, 14vw, 9.5rem);
+      font-weight: 800;
+      letter-spacing: -7px;
+      line-height: 0.92;
+    }
+    .reading-number.is-error { letter-spacing: -2px; }
+    .state-line {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1rem 0.5rem 0.6rem;
+      border-radius: 999px;
+      background: var(--state-color);
+      color: var(--branco);
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .state-icon {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      display: grid;
+      place-items: center;
+      border: 3px solid currentColor;
+      border-radius: 50%;
+    }
+    .state-icon svg { width: 26px; height: 26px; }
+    .irrigation-callout {
+      margin: 1.5rem 0 0;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--state-color);
+      border-radius: 12px;
+      background: var(--branco);
+      color: var(--state-color);
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .home-mascot {
+      width: min(100%, 310px);
+      justify-self: center;
+    }
+    .mascot-slot svg { width: 100%; height: auto; }
+    .mascot-slot svg > circle:first-of-type,
+    .mascot-slot svg > g:first-of-type { stroke: var(--state-color); }
+    .mascot-slot svg > g:first-of-type path[fill="#e9f2ec"] { fill: #74ab8d; }
+    .mascot-slot[data-state="encharcado"] svg > g:last-of-type { fill: #74ab8d; }
+    .mascot-slot[data-state="irrigar-agora"] svg > g:first-of-type path:last-child { fill: #74ab8d; }
+    .mascot-caption {
+      margin: 0.5rem 0 0;
+      color: var(--state-color);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) minmax(180px, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .button {
+      min-height: 56px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      padding: 0.85rem 1.25rem;
+      border: 2px solid var(--verde-escuro);
+      border-radius: 8px;
+      background: var(--verde-escuro);
+      color: var(--branco);
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 180ms ease, transform 180ms ease;
+    }
+    .button:hover { background: var(--verde); }
+    .button:active { transform: translateY(1px); }
+    .button.secondary { background: var(--branco); color: var(--verde-escuro); }
+    .button.secondary:hover { background: var(--creme); }
+    .button svg { width: 26px; height: 26px; flex: 0 0 26px; }
+    .live-message {
+      min-height: 1.7rem;
+      margin: 0.75rem 0 0;
+      color: var(--verde);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .beds-list { display: grid; gap: 1.5rem; }
+    .bed-card {
+      --state-color: var(--verde);
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) 118px;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      border: 2px solid var(--state-color);
+      border-radius: 24px;
+      background: color-mix(in srgb, var(--state-color) 12%, var(--branco));
+    }
+    .bed-number {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--state-color);
+      border-radius: 50%;
+      background: var(--state-color);
+      color: var(--branco);
+      font-family: "Manrope", sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+    .bed-card h2 { margin-bottom: 0.4rem; color: var(--state-color); font-size: 1.45rem; }
+    .bed-reading { margin: 0; font-size: 1.05rem; font-weight: 700; }
+    .bed-state {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 0.55rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: var(--state-color);
+      color: var(--branco);
+      font-weight: 700;
+    }
+    .bed-state svg { width: 24px; height: 24px; }
+    .bed-mascot { width: 110px; }
+
+    .history-simple {
+      padding: clamp(1.25rem, 4vw, 2rem);
+      border: 2px solid var(--estado-atencao);
+      border-radius: 24px;
+      background: color-mix(in srgb, var(--estado-atencao) 10%, var(--branco));
+    }
+    .history-simple h2 { margin-bottom: 0.5rem; }
+    .history-result { margin: 0; font-size: 1.1rem; }
+    .history-result strong { color: var(--estado-atencao); }
+    .history-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .history-step {
+      --state-color: var(--verde);
+      padding: 1rem;
+      border: 2px solid var(--state-color);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--state-color) 12%, var(--branco));
+    }
+    .history-step-time {
+      width: fit-content;
+      margin: 0 0 0.75rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: var(--state-color);
+      color: var(--branco);
+      font-weight: 700;
+    }
+    .history-step strong { display: block; color: var(--state-color); font-family: "Manrope", sans-serif; font-size: 1.1rem; }
+    .history-step span { display: block; margin-top: 0.25rem; }
+    .history-simple .button { margin-top: 1.5rem; }
+    .technical-history { margin-top: 1.5rem; }
+    .technical-history summary {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--verde-escuro);
+      border-radius: 8px;
+      color: var(--verde-escuro);
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+    }
+    .technical-history summary::-webkit-details-marker { display: none; }
+    .technical-history summary::before { content: "+"; font-family: "Manrope", sans-serif; font-size: 1.4rem; line-height: 1; }
+    .technical-history[open] summary::before { content: "−"; }
+    .technical-history .chart-card { margin-top: 0.75rem; }
+
+    .chart-card {
+      padding: clamp(1.25rem, 4vw, 2rem);
+      overflow: hidden;
+      border-radius: 24px;
+      background: var(--verde-claro);
+    }
+    .chart-card h2 { margin-bottom: 0.35rem; font-size: 1.35rem; }
+    .chart-card > p { margin-top: 0; }
+    .chart-wrap { overflow-x: auto; padding: 0.5rem 0.25rem 0.75rem; }
+    .chart { min-width: 650px; width: 100%; height: auto; }
+    .chart text { fill: var(--texto); font-family: "DM Sans", sans-serif; font-size: 15px; }
+    .chart .grid { stroke: var(--linha); stroke-width: 2; }
+    .chart .line { fill: none; stroke: var(--verde-escuro); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+    .chart .point { fill: var(--branco); stroke: var(--verde-escuro); stroke-width: 4; }
+    .chart .threshold { fill: none; stroke: var(--marrom-terra); stroke-width: 3; stroke-dasharray: 9 8; }
+    .chart-legend { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 0.75rem; }
+    .legend-item { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+    .legend-line { width: 34px; border-top: 4px solid var(--verde-escuro); }
+    .legend-line.dashed { border-top-color: var(--marrom-terra); border-top-style: dashed; }
+
+    .support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+    .support-card {
+      padding: 1.5rem;
+      border-radius: 24px;
+      background: var(--verde-claro);
+    }
+    .support-card h2 { margin-bottom: 0.55rem; font-size: 1.35rem; }
+    .support-card p { margin-top: 0; }
+    .support-card .button { width: 100%; margin-top: 0.75rem; }
+    .helper-note {
+      margin-top: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      border-left: 5px solid var(--verde);
+      border-radius: 0 12px 12px 0;
+      background: var(--creme);
+    }
+    .helper-note p { margin: 0; }
+    .mascot-guide {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(130px, 1fr));
+      gap: 0.75rem;
+      margin-top: 3rem;
+    }
+    .guide-item {
+      --state-color: var(--verde);
+      padding: 1rem;
+      border: 2px solid var(--state-color);
+      border-radius: 24px;
+      background: color-mix(in srgb, var(--state-color) 10%, var(--branco));
+      text-align: center;
+    }
+    .guide-item .mascot-slot { width: 110px; margin-inline: auto; }
+    .guide-item h3 { margin: 0.75rem 0 0.25rem; color: var(--state-color); font-size: 1rem; }
+    .guide-item p { margin: 0; font-size: 0.94rem; line-height: 1.45; }
+
+    .app-footer {
+      padding: 2rem 0 calc(var(--nav-altura) + 2rem);
+      background: var(--creme);
+      border-top: 1px solid var(--linha);
+      text-align: center;
+    }
+    .app-footer p { margin: 0; }
+    .footer-notice { font-weight: 700; }
+    .footer-meta { margin-top: 0.75rem !important; color: var(--texto); font-size: 0.94rem; }
+
+    .bottom-nav {
+      position: fixed;
+      inset: auto 0 0;
+      z-index: 90;
+      height: var(--nav-altura);
+      background: var(--branco);
+      border-top: 1px solid var(--linha);
+    }
+    .nav-list {
+      width: min(100%, 720px);
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+    }
+    .nav-button {
+      width: 100%;
+      min-height: 58px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.15rem;
+      border: 0;
+      border-top: 4px solid transparent;
+      background: var(--branco);
+      color: var(--texto);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+    .nav-button svg { width: 26px; height: 26px; }
+    .nav-button[aria-selected="true"] { border-top-color: var(--verde); color: var(--verde-escuro); background: var(--verde-claro); }
+
+    @media (max-width: 820px) {
+      .status-card { grid-template-columns: 1fr; }
+      .status-copy { text-align: center; }
+      .state-line { justify-content: center; }
+      .support-grid { grid-template-columns: 1fr; }
+      .history-steps { grid-template-columns: 1fr; }
+      .mascot-guide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .guide-item:last-child { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 600px) {
+      :root { --aviso-altura: 68px; --nav-altura: 72px; }
+      body { font-size: 15px; }
+      .container { width: min(92%, 1120px); }
+      .header-inner { min-height: 66px; }
+      .brand { font-size: 1.25rem; }
+      .brand-mark { width: 38px; height: 38px; }
+      .back-site { font-size: 0.9rem; }
+      .screen { padding: 2rem 0; }
+      .status-card { gap: 1rem; padding: 1.5rem 1rem; }
+      .reading-number { font-size: clamp(5.2rem, 28vw, 8rem); letter-spacing: -5px; }
+      .home-mascot { width: min(72vw, 240px); }
+      .actions, .support-grid { grid-template-columns: 1fr; }
+      .button { width: 100%; }
+      .bed-card { grid-template-columns: auto minmax(0, 1fr); gap: 1rem; padding: 1.25rem; }
+      .bed-mascot { grid-column: 1 / -1; width: 96px; justify-self: center; }
+      .chart-card { padding-inline: 1rem; }
+      .mascot-guide { grid-template-columns: 1fr; }
+      .guide-item:last-child { grid-column: auto; }
+      .nav-button { font-size: 0.76rem; }
+      .nav-button svg { width: 24px; height: 24px; }
+    }
+
+    @media (max-width: 380px) {
+      :root { --aviso-altura: 84px; }
+      .header-inner { gap: 0.75rem; }
+      .brand { font-size: 1.1rem; }
+      .brand-mark { width: 34px; height: 34px; }
+      .back-site { max-width: 112px; line-height: 1.25; text-align: right; }
+      .state-line { font-size: 1.35rem; }
+      .irrigation-callout { padding-inline: 0.75rem; font-size: 1.15rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+
+  <div class="prototype-notice" role="note">
+    Protótipo simulado gerado com inteligência artificial. Os dados são fictícios e não vêm de um sensor real.
+  </div>
+
+  <header class="app-header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" data-go="inicio" aria-label="RAIZ, ir para o início">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="21" fill="#e9f2ec"/>
+            <path d="M24 38V20M24 22C16 22 11 17 10 10c8 0 13 5 14 12Zm0 0c8 0 13-5 14-12-8 0-13 5-14 12Z" stroke="#173f35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>RAIZ<span class="brand-dot">.</span></span>
+      </a>
+      <a class="back-site" href="https://raiz-site-eta.vercel.app" aria-label="Voltar ao site principal do RAIZ">← Voltar ao site</a>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="screen" id="inicio" aria-labelledby="inicio-title">
+      <div class="container">
+        <p class="eyebrow">Leitura do solo agora</p>
+        <h1 id="inicio-title">Seu cultivo</h1>
+        <p class="screen-intro">Veja a situação do canteiro e saiba quando colocar água.</p>
+
+        <article class="status-card" aria-live="polite" aria-atomic="true">
+          <div class="status-copy">
+            <p class="reading-number" id="current-moisture">42%</p>
+            <div class="state-line">
+              <span class="state-icon" id="current-icon" aria-hidden="true"></span>
+              <span id="current-state">Atenção</span>
+            </div>
+            <p class="irrigation-callout" id="irrigation-time">Irrigar em 6 h</p>
+          </div>
+          <figure class="home-mascot">
+            <div class="mascot-slot" id="current-mascot"></div>
+            <figcaption class="mascot-caption" id="mascot-caption">Atenção: acompanhe o solo.</figcaption>
+          </figure>
+        </article>
+
+        <div class="actions">
+          <button class="button" id="speak-button" type="button">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M8 19h8l10-8v26l-10-8H8V19Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M32 18c4 4 4 8 0 12M37 13c7 7 7 15 0 22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+            Ouvir
+          </button>
+          <button class="button secondary" id="simulate-button" type="button">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M38 16a16 16 0 1 0 1 15" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="m31 9 8 7-9 5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Simular nova leitura
+          </button>
+        </div>
+        <p class="live-message" id="live-message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="screen" id="canteiros" aria-labelledby="canteiros-title" hidden>
+      <div class="container">
+        <p class="eyebrow">Visão por cultivo</p>
+        <h1 id="canteiros-title">Canteiros</h1>
+        <p class="screen-intro">Três leituras simuladas para você comparar.</p>
+        <div class="beds-list" id="beds-list"></div>
+      </div>
+    </section>
+
+    <section class="screen" id="historico" aria-labelledby="historico-title" hidden>
+      <div class="container">
+        <p class="eyebrow">Últimas 24 horas</p>
+        <h1 id="historico-title">Histórico</h1>
+        <p class="screen-intro">A umidade diminuiu aos poucos durante o dia.</p>
+        <section class="history-simple" aria-labelledby="history-simple-title">
+          <h2 id="history-simple-title">O que aconteceu</h2>
+          <p class="history-result"><strong>Agora é atenção.</strong> O solo perdeu água durante o dia. Irrigue em 6 horas.</p>
+          <div class="history-steps" aria-label="Resumo da mudança de umidade">
+            <article class="history-step" style="--state-color: var(--estado-solo-ok)">
+              <p class="history-step-time">24 h atrás</p>
+              <strong>Solo ok</strong>
+              <span>65% de umidade</span>
+            </article>
+            <article class="history-step" style="--state-color: var(--estado-solo-ok)">
+              <p class="history-step-time">12 h atrás</p>
+              <strong>Solo ok</strong>
+              <span>52% de umidade</span>
+            </article>
+            <article class="history-step" style="--state-color: var(--estado-atencao)">
+              <p class="history-step-time">Agora</p>
+              <strong>Atenção</strong>
+              <span>42% de umidade</span>
+            </article>
+          </div>
+          <button class="button" id="speak-history-button" type="button">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M8 19h8l10-8v26l-10-8H8V19Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M32 18c4 4 4 8 0 12M37 13c7 7 7 15 0 22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+            Ouvir o histórico
+          </button>
+          <p class="live-message" id="history-live-message" role="status" aria-live="polite"></p>
+        </section>
+
+        <details class="technical-history">
+          <summary>Ver gráfico técnico</summary>
+          <article class="chart-card">
+          <h2>Umidade do canteiro de alface</h2>
+          <p>Valores simulados em porcentagem de água no solo.</p>
+          <div class="chart-wrap" tabindex="0" aria-label="Gráfico rolável horizontalmente em telas pequenas">
+            <svg class="chart" viewBox="0 0 760 390" role="img" aria-labelledby="chart-title chart-desc">
+              <title id="chart-title">Umidade do solo nas últimas 24 horas</title>
+              <desc id="chart-desc">A umidade caiu de 65 por cento à meia-noite para 42 por cento agora. A linha de atenção está em 45 por cento.</desc>
+              <line class="grid" x1="82" y1="55" x2="720" y2="55"/><line class="grid" x1="82" y1="135" x2="720" y2="135"/><line class="grid" x1="82" y1="215" x2="720" y2="215"/><line class="grid" x1="82" y1="295" x2="720" y2="295"/>
+              <text x="34" y="61">70%</text><text x="34" y="141">60%</text><text x="34" y="221">50%</text><text x="34" y="301">40%</text>
+              <path class="threshold" d="M82 255H720"/><text x="528" y="246">Atenção: 45%</text>
+              <path class="line" d="M82 95 L188 111 L294 143 L400 175 L506 207 L612 247 L720 279"/>
+              <g><circle class="point" cx="82" cy="95" r="7"/><circle class="point" cx="188" cy="111" r="7"/><circle class="point" cx="294" cy="143" r="7"/><circle class="point" cx="400" cy="175" r="7"/><circle class="point" cx="506" cy="207" r="7"/><circle class="point" cx="612" cy="247" r="7"/><circle class="point" cx="720" cy="279" r="7"/></g>
+              <text x="68" y="340">0 h</text><text x="174" y="340">4 h</text><text x="280" y="340">8 h</text><text x="380" y="340">12 h</text><text x="486" y="340">16 h</text><text x="592" y="340">20 h</text><text x="690" y="340">Agora</text>
+              <text x="69" y="82">65%</text><text x="694" y="307">42%</text>
+            </svg>
+          </div>
+          <div class="chart-legend" aria-label="Legenda do gráfico">
+            <span class="legend-item"><span class="legend-line" aria-hidden="true"></span> Umidade medida</span>
+            <span class="legend-item"><span class="legend-line dashed" aria-hidden="true"></span> Limite de atenção</span>
+          </div>
+          </article>
+        </details>
+      </div>
+    </section>
+
+    <section class="screen" id="ajuda" aria-labelledby="ajuda-title" hidden>
+      <div class="container">
+        <p class="eyebrow">Atendimento humano</p>
+        <h1 id="ajuda-title">Ajuda</h1>
+        <p class="screen-intro">Se tiver dúvida, fale com uma pessoa. Os números abaixo são fictícios.</p>
+        <div class="support-grid">
+          <article class="support-card">
+            <h2>Cooperativa</h2>
+            <p>Atendimento de segunda a sexta, das 8 h às 17 h.</p>
+            <a class="button" href="tel:+551140000101" aria-label="Ligar para a cooperativa no número fictício 11 4000 0101">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M15 7h7l3 10-5 4c3 6 6 9 12 12l4-5 10 3v7c0 4-3 7-7 7C20 44 4 28 4 9c0-1 1-2 2-2h9Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ligar para a cooperativa
+            </a>
+          </article>
+          <article class="support-card">
+            <h2>Casa da Agricultura</h2>
+            <p>Orientação presencial e por telefone para o produtor.</p>
+            <a class="button" href="tel:+551140000202" aria-label="Ligar para a Casa da Agricultura no número fictício 11 4000 0202">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M15 7h7l3 10-5 4c3 6 6 9 12 12l4-5 10 3v7c0 4-3 7-7 7C20 44 4 28 4 9c0-1 1-2 2-2h9Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Casa da Agricultura
+            </a>
+          </article>
+        </div>
+        <aside class="helper-note">
+          <p><strong>Importante:</strong> este protótipo não substitui a orientação de uma pessoa técnica.</p>
+        </aside>
+
+        <div class="mascot-guide" id="mascot-guide" aria-label="Explicação das cinco expressões do mascote"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container">
+      <p class="footer-notice">Protótipo simulado gerado com inteligência artificial. Os dados são fictícios e não vêm de um sensor real.</p>
+      <p class="footer-meta">RAIZ, projeto acadêmico do grupo SONDER para a FIAP Global Solution 2026.</p>
+    </div>
+  </footer>
+
+  <nav class="bottom-nav" aria-label="Telas do aplicativo">
+    <ul class="nav-list" role="tablist">
+      <li><button class="nav-button" type="button" role="tab" aria-selected="true" aria-controls="inicio" data-screen="inicio"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="m7 23 17-15 17 15v18H29V29H19v12H7V23Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg><span>Início</span></button></li>
+      <li><button class="nav-button" type="button" role="tab" aria-selected="false" aria-controls="canteiros" data-screen="canteiros"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M6 37c9-6 27-6 36 0M8 27c9-6 23-6 32 0M13 17c6-4 16-4 22 0M24 17V8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 12c-5 0-8-3-9-7 5 0 8 2 9 7Zm0 0c5 0 8-3 9-7-5 0-8 2-9 7Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg><span>Canteiros</span></button></li>
+      <li><button class="nav-button" type="button" role="tab" aria-selected="false" aria-controls="historico" data-screen="historico"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M7 40V8M7 40h34" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="m12 33 8-9 7 5 12-16" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Histórico</span></button></li>
+      <li><button class="nav-button" type="button" role="tab" aria-selected="false" aria-controls="ajuda" data-screen="ajuda"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="3"/><path d="M18 18a6 6 0 1 1 8 6c-2 1-2 3-2 5M24 35h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><span>Ajuda</span></button></li>
+    </ul>
+  </nav>
+
+  <template id="mascot-encharcado">
+    <svg viewBox="0 0 512 512" role="img" aria-labelledby="encharcado-title encharcado-desc"><title id="encharcado-title">Mascote RAIZ encharcado</title><desc id="encharcado-desc">Broto pingando água, com folhas murchas e expressão de desconforto.</desc><circle cx="256" cy="258" r="216" fill="#e9f2ec" stroke="#28745a" stroke-width="12"/><g stroke="#28745a" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path fill="#28745a" d="M247 142C189 148 137 119 124 65c56-7 109 19 132 69 18-49 69-78 126-74-9 55-59 89-116 84z"/><path fill="#28745a" d="M204 293c-47-4-88 20-104 62 48 12 93-4 121-42z"/><path fill="#e9f2ec" d="M308 292c49 0 91 27 104 71-50 8-95-12-120-52z"/><path fill="#28745a" d="M256 132c67 0 111 46 105 108-3 32-19 58-43 74l15 130c3 25-16 44-41 44h-72c-25 0-44-19-41-44l15-130c-24-16-40-42-43-74-6-62 38-108 105-108z"/></g><g fill="#173f35"><ellipse cx="220" cy="231" rx="10" ry="15"/><ellipse cx="292" cy="231" rx="10" ry="15"/></g><path d="M222 277c10-13 22-18 34-18s24 5 34 18" fill="none" stroke="#173f35" stroke-width="12" stroke-linecap="round"/><g fill="#e9f2ec" stroke="#173f35" stroke-width="7"><path d="M103 384c15 20 15 37 0 50-15-13-15-30 0-50z"/><path d="M415 389c15 20 15 37 0 50-15-13-15-30 0-50z"/></g></svg>
+  </template>
+  <template id="mascot-solo-ok">
+    <svg viewBox="0 0 512 512" role="img" aria-labelledby="ok-title ok-desc"><title id="ok-title">Mascote RAIZ solo ok</title><desc id="ok-desc">Broto tranquilo, com folhas erguidas e sorriso leve.</desc><circle cx="256" cy="258" r="216" fill="#e9f2ec" stroke="#28745a" stroke-width="12"/><g stroke="#28745a" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path fill="#28745a" d="M250 142C191 144 139 111 130 55c58-3 109 27 128 80 22-52 76-78 133-70-14 55-68 84-126 78z"/><path fill="#28745a" d="M199 305c-48-8-88-41-99-87 49-6 92 18 116 62z"/><path fill="#e9f2ec" d="M313 305c48-8 88-41 99-87-49-6-92 18-116 62z"/><path fill="#28745a" d="M256 132c67 0 111 46 105 108-3 32-19 58-43 74l15 130c3 25-16 44-41 44h-72c-25 0-44-19-41-44l15-130c-24-16-40-42-43-74-6-62 38-108 105-108z"/></g><g fill="#173f35"><circle cx="220" cy="231" r="11"/><circle cx="292" cy="231" r="11"/></g><path d="M224 264c18 15 46 15 64 0" fill="none" stroke="#173f35" stroke-width="10" stroke-linecap="round"/></svg>
+  </template>
+  <template id="mascot-atencao">
+    <svg viewBox="0 0 512 512" role="img" aria-labelledby="atencao-title atencao-desc"><title id="atencao-title">Mascote RAIZ atenção</title><desc id="atencao-desc">Broto em alerta leve, com uma folha apontando para cima.</desc><circle cx="256" cy="258" r="216" fill="#f8f8f1" stroke="#b07d4f" stroke-width="12"/><g stroke="#b07d4f" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path fill="#28745a" d="M250 142C191 144 139 111 130 55c58-3 109 27 128 80 22-52 76-78 133-70-14 55-68 84-126 78z"/><path fill="#28745a" d="M202 307c-49 2-93-22-113-65 47-14 94 3 124 41z"/><path fill="#e9f2ec" d="M309 287c21-45 61-76 107-79 4 50-22 92-70 113z"/><path fill="#28745a" d="M256 132c67 0 111 46 105 108-3 32-19 58-43 74l15 130c3 25-16 44-41 44h-72c-25 0-44-19-41-44l15-130c-24-16-40-42-43-74-6-62 38-108 105-108z"/></g><g fill="#173f35"><circle cx="220" cy="231" r="11"/><circle cx="292" cy="231" r="11"/></g><path d="M229 270c17-8 37-8 54 0" fill="none" stroke="#173f35" stroke-width="10" stroke-linecap="round"/><path d="M302 192l14-9" fill="none" stroke="#173f35" stroke-width="8" stroke-linecap="round"/></svg>
+  </template>
+  <template id="mascot-irrigar-agora">
+    <svg viewBox="0 0 512 512" role="img" aria-labelledby="irrigar-title irrigar-desc"><title id="irrigar-title">Mascote RAIZ irrigar agora</title><desc id="irrigar-desc">Broto com sede, boca aberta e folhas caídas.</desc><circle cx="256" cy="258" r="216" fill="#f8f8f1" stroke="#173f35" stroke-width="12"/><g stroke="#173f35" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path fill="#28745a" d="M248 146C191 151 140 125 125 74c54-11 106 11 130 58 17-49 64-80 119-80-5 53-50 89-107 93z"/><path fill="#28745a" d="M204 294c-47-1-90 27-104 70 49 9 93-10 119-49z"/><path fill="#e9f2ec" d="M308 294c47-1 90 27 104 70-49 9-93-10-119-49z"/><path fill="#28745a" d="M256 132c67 0 111 46 105 108-3 32-19 58-43 74l15 130c3 25-16 44-41 44h-72c-25 0-44-19-41-44l15-130c-24-16-40-42-43-74-6-62 38-108 105-108z"/></g><g fill="#173f35"><ellipse cx="220" cy="231" rx="10" ry="14"/><ellipse cx="292" cy="231" rx="10" ry="14"/></g><ellipse cx="256" cy="274" rx="14" ry="17" fill="#173f35"/><path d="M204 198l25 4m54 0 25-4" fill="none" stroke="#173f35" stroke-width="8" stroke-linecap="round"/></svg>
+  </template>
+  <template id="mascot-sensor-falhou">
+    <svg viewBox="0 0 512 512" role="img" aria-labelledby="falhou-title falhou-desc"><title id="falhou-title">Mascote RAIZ sensor falhou</title><desc id="falhou-desc">Broto confuso, com as folhas encolhidas como ombros.</desc><circle cx="256" cy="258" r="216" fill="#e9f2ec" stroke="#173f35" stroke-width="12" stroke-dasharray="18 14"/><g stroke="#173f35" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path fill="#28745a" d="M250 142C191 144 139 111 130 55c58-3 109 27 128 80 22-52 76-78 133-70-14 55-68 84-126 78z"/><path fill="#28745a" d="M205 315c-35 3-66-12-84-41 34-16 70-8 96 17z"/><path fill="#e9f2ec" d="M307 315c35 3 66-12 84-41-34-16-70-8-96 17z"/><path fill="#28745a" d="M256 132c67 0 111 46 105 108-3 32-19 58-43 74l15 130c3 25-16 44-41 44h-72c-25 0-44-19-41-44l15-130c-24-16-40-42-43-74-6-62 38-108 105-108z"/></g><g fill="#173f35"><circle cx="220" cy="231" r="11"/><circle cx="292" cy="231" r="11"/></g><path d="M230 276c10-6 20 6 30 0s20 6 30 0" fill="none" stroke="#173f35" stroke-width="10" stroke-linecap="round"/><path d="M205 197l24-7m54 0 24 7" fill="none" stroke="#173f35" stroke-width="8" stroke-linecap="round"/></svg>
+  </template>
+
+  <script>
+    const simulatedData = {
+      currentState: "atencao",
+      states: {
+        "encharcado": { label: "Encharcado", color: "#1d5f7a", moisture: 88, irrigation: "Não irrigar agora", hours: null, caption: "Encharcado: espere o solo secar.", speech: "Solo com oitenta e oito por cento de água. Encharcado. Não irrigar agora.", guide: "Tem água demais. Espere." },
+        "solo-ok": { label: "Solo ok", color: "#28745a", moisture: 63, irrigation: "Água suficiente", hours: 18, caption: "Solo ok: tudo tranquilo.", speech: "Solo com sessenta e três por cento de água. Solo ok. Água suficiente.", guide: "A quantidade de água está boa." },
+        "atencao": { label: "Atenção", color: "#9a6a3c", moisture: 42, irrigation: "Irrigar em 6 h", hours: 6, caption: "Atenção: acompanhe o solo.", speech: "Solo com quarenta e dois por cento de água. Atenção. Irrigar em seis horas.", guide: "A água está baixando. Acompanhe." },
+        "irrigar-agora": { label: "Irrigar agora", color: "#b33a2b", moisture: 24, irrigation: "Coloque água agora", hours: 0, caption: "Irrigar agora: o solo está seco.", speech: "Solo com vinte e quatro por cento de água. Irrigar agora. Coloque água no canteiro.", guide: "O solo está seco. Coloque água." },
+        "sensor-falhou": { label: "Sensor falhou", color: "#6c5b8f", moisture: null, irrigation: "Ligue para o suporte", hours: null, caption: "Sensor falhou: peça ajuda.", speech: "O sensor falhou. Não há leitura do solo. Ligue para o suporte.", guide: "Não há leitura. Peça ajuda." }
+      },
+      beds: [
+        { number: 1, crop: "Alface", state: "atencao", moisture: 42 },
+        { number: 2, crop: "Rúcula", state: "solo-ok", moisture: 61 },
+        { number: 3, crop: "Couve", state: "irrigar-agora", moisture: 26 }
+      ]
+    };
+
+    const stateOrder = ["encharcado", "solo-ok", "atencao", "irrigar-agora", "sensor-falhou"];
+    const icons = {
+      "encharcado": '<svg viewBox="0 0 48 48" fill="none"><path d="M24 5c8 11 13 18 13 25a13 13 0 0 1-26 0c0-7 5-14 13-25Z" stroke="currentColor" stroke-width="3"/><path d="M18 31c2 4 5 6 9 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>',
+      "solo-ok": '<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="3"/><path d="m15 24 6 6 12-13" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      "atencao": '<svg viewBox="0 0 48 48" fill="none"><path d="M24 6 43 40H5L24 6Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M24 18v10m0 6h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>',
+      "irrigar-agora": '<svg viewBox="0 0 48 48" fill="none"><path d="M24 5c8 11 13 18 13 25a13 13 0 0 1-26 0c0-7 5-14 13-25Z" stroke="currentColor" stroke-width="3"/><path d="M18 30h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>',
+      "sensor-falhou": '<svg viewBox="0 0 48 48" fill="none"><path d="M10 10l28 28M38 10 10 38" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="3" stroke-dasharray="5 5"/></svg>'
+    };
+
+    function mascotClone(state) {
+      return document.getElementById(`mascot-${state}`).content.cloneNode(true);
+    }
+
+    function placeMascot(target, state) {
+      target.dataset.state = state;
+      target.style.setProperty("--state-color", simulatedData.states[state].color);
+      target.replaceChildren(mascotClone(state));
+    }
+
+    function renderCurrent() {
+      const stateKey = simulatedData.currentState;
+      const state = simulatedData.states[stateKey];
+      const statusCard = document.querySelector(".status-card");
+      statusCard.dataset.state = stateKey;
+      statusCard.style.setProperty("--state-color", state.color);
+      const moisture = document.getElementById("current-moisture");
+      moisture.textContent = state.moisture === null ? "--" : `${state.moisture}%`;
+      moisture.classList.toggle("is-error", state.moisture === null);
+      document.getElementById("current-state").textContent = state.label;
+      document.getElementById("current-icon").innerHTML = icons[stateKey];
+      document.getElementById("irrigation-time").textContent = state.irrigation;
+      document.getElementById("mascot-caption").textContent = state.caption;
+      placeMascot(document.getElementById("current-mascot"), stateKey);
+    }
+
+    function renderBeds() {
+      const list = document.getElementById("beds-list");
+      list.replaceChildren();
+      simulatedData.beds.forEach((bed) => {
+        const state = simulatedData.states[bed.state];
+        const card = document.createElement("article");
+        card.className = "bed-card";
+        card.dataset.state = bed.state;
+        card.style.setProperty("--state-color", state.color);
+        card.innerHTML = `<div class="bed-number" aria-label="Canteiro ${bed.number}">${bed.number}</div><div><h2>${bed.crop}</h2><p class="bed-reading">${bed.moisture}% de umidade</p><div class="bed-state">${icons[bed.state]}<span>${state.label}</span></div></div><div class="mascot-slot bed-mascot"></div>`;
+        placeMascot(card.querySelector(".mascot-slot"), bed.state);
+        list.append(card);
+      });
+    }
+
+    function renderGuide() {
+      const guide = document.getElementById("mascot-guide");
+      stateOrder.forEach((key) => {
+        const state = simulatedData.states[key];
+        const item = document.createElement("article");
+        item.className = "guide-item";
+        item.dataset.state = key;
+        item.style.setProperty("--state-color", state.color);
+        item.innerHTML = `<div class="mascot-slot"></div><h3>${state.label}</h3><p>${state.guide}</p>`;
+        placeMascot(item.querySelector(".mascot-slot"), key);
+        guide.append(item);
+      });
+    }
+
+    function showScreen(screenId, moveFocus = true) {
+      document.querySelectorAll(".screen").forEach((screen) => { screen.hidden = screen.id !== screenId; });
+      document.querySelectorAll(".nav-button").forEach((button) => { button.setAttribute("aria-selected", String(button.dataset.screen === screenId)); });
+      history.replaceState(null, "", `#${screenId}`);
+      window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      if (moveFocus) {
+        const title = document.querySelector(`#${screenId} h1`);
+        title.setAttribute("tabindex", "-1");
+        title.focus({ preventScroll: true });
+      }
+    }
+
+    function speakCurrent() {
+      const message = document.getElementById("live-message");
+      if (!("speechSynthesis" in window)) {
+        message.textContent = "A leitura por voz não está disponível neste navegador.";
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(simulatedData.states[simulatedData.currentState].speech);
+      utterance.lang = "pt-BR";
+      utterance.rate = 0.9;
+      utterance.onstart = () => { message.textContent = "Lendo a situação do solo em voz alta."; };
+      utterance.onend = () => { message.textContent = "Leitura concluída."; };
+      utterance.onerror = () => { message.textContent = "Não foi possível fazer a leitura por voz."; };
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function speakHistory() {
+      const message = document.getElementById("history-live-message");
+      if (!("speechSynthesis" in window)) {
+        message.textContent = "A leitura por voz não está disponível neste navegador.";
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance("Nas últimas vinte e quatro horas, a umidade do solo caiu de sessenta e cinco para quarenta e dois por cento. Agora é atenção. Irrigue em seis horas.");
+      utterance.lang = "pt-BR";
+      utterance.rate = 0.9;
+      utterance.onstart = () => { message.textContent = "Lendo o histórico em voz alta."; };
+      utterance.onend = () => { message.textContent = "Leitura concluída."; };
+      utterance.onerror = () => { message.textContent = "Não foi possível fazer a leitura por voz."; };
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function simulateReading() {
+      const currentIndex = stateOrder.indexOf(simulatedData.currentState);
+      const choices = stateOrder.filter((_, index) => index !== currentIndex);
+      simulatedData.currentState = choices[Math.floor(Math.random() * choices.length)];
+      renderCurrent();
+      const state = simulatedData.states[simulatedData.currentState];
+      document.getElementById("live-message").textContent = `Nova leitura simulada: ${state.label}.`;
+    }
+
+    document.querySelectorAll(".nav-button").forEach((button) => button.addEventListener("click", () => showScreen(button.dataset.screen)));
+    document.querySelectorAll("[data-go]").forEach((link) => link.addEventListener("click", (event) => { event.preventDefault(); showScreen(link.dataset.go); }));
+    document.getElementById("speak-button").addEventListener("click", speakCurrent);
+    document.getElementById("speak-history-button").addEventListener("click", speakHistory);
+    document.getElementById("simulate-button").addEventListener("click", simulateReading);
+
+    renderCurrent();
+    renderBeds();
+    renderGuide();
+    const initialScreen = ["inicio", "canteiros", "historico", "ajuda"].includes(location.hash.slice(1)) ? location.hash.slice(1) : "inicio";
+    showScreen(initialScreen, false);
+  </script>
+</body>
+</html>

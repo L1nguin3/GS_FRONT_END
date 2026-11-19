@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title desc">
+  <title id="title">Ícone RAIZ</title>
+  <desc id="desc">Broto simétrico de duas folhas dentro de um círculo verde-claro.</desc>
+  <circle cx="24" cy="24" r="21" fill="#E9F2EC"/>
+  <g fill="none" stroke="#173F35" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 38V20"/>
+    <path id="folha" d="M24 21C17 21 12 17 11 10c7 0 12 4 13 11Z"/>
+    <use href="#folha" transform="translate(48 0) scale(-1 1)"/>
+  </g>
+</svg>

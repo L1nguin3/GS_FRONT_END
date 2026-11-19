@@ -26,6 +26,38 @@ O projeto se conecta às ODS **2** (Fome zero), **9** (Indústria, inovação e 
 - **Acessibilidade**: quatro caminhos para a mesma informação (interface facilitada, voz, mascote e suporte humano)
 - **Feedback**: formulário para o visitante deixar sua opinião
 
+## MVP simulado
+
+Além da landing page, o RAIZ tem um **protótipo navegável do aplicativo**, publicado como subdomínio do site. Ele mostra como o produtor usaria o RAIZ no dia a dia.
+
+> **Protótipo simulado gerado com inteligência artificial.** Os dados são fictícios e não vêm de um sensor real. O aviso aparece em todas as telas.
+
+| Tela | O que mostra |
+| --- | --- |
+| **Início** | Umidade atual em número grande, o estado em uma palavra, o mascote e em quantas horas irrigar |
+| **Canteiros** | Alface, rúcula e couve, cada um com número, estado, ícone e mascote |
+| **Histórico** | Gráfico das últimas 24 horas, com rótulos escritos |
+| **Ajuda** | Contato com a cooperativa e a Casa da Agricultura, e explicação do mascote |
+
+**Os quatro caminhos da acessibilidade, ao mesmo tempo:**
+
+- **Interface facilitada:** número grande, uma palavra só, ícone antes do texto e alvos de toque de 44 px.
+- **Dados por voz:** o botão "Ouvir" lê a leitura e a recomendação em português simples.
+- **Mascote interativo:** as cinco expressões mudam conforme o estado do solo.
+- **Suporte por equipe:** atendimento humano sempre a um toque.
+
+<p align="center">
+  <img src="img/mascote/01-encharcado.svg" alt="Mascote encharcado" width="70">
+  <img src="img/mascote/02-solo-ok.svg" alt="Mascote com solo ok" width="70">
+  <img src="img/mascote/03-atencao.svg" alt="Mascote em atenção" width="70">
+  <img src="img/mascote/04-irrigar-agora.svg" alt="Mascote pedindo para irrigar agora" width="70">
+  <img src="img/mascote/05-sensor-falhou.svg" alt="Mascote com o sensor falhou" width="70">
+  <br>
+  <sub>Encharcado · Solo ok · Atenção · Irrigar agora · Sensor falhou</sub>
+</p>
+
+O protótipo segue a mesma identidade visual da landing page. Um botão "Simular nova leitura" sorteia um dos cinco estados para demonstrar o funcionamento.
+
 ## Tecnologias
 
 - **HTML5**: estrutura semântica (`header`, `main`, `section`, `footer`)

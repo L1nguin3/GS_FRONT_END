@@ -559,3 +559,16 @@ button:focus-visible,
     outline: 3px solid #d18a25;
     outline-offset: 4px;
 }
+
+.botao-secundario {
+    margin-left: 0.75rem;
+    border: 2px solid var(--verde);
+    background: transparent;
+    color: var(--verde-escuro);
+}
+
+.botao-secundario:hover {
+    border-color: var(--verde-escuro);
+    background: var(--verde-escuro);
+    color: var(--branco);
+}

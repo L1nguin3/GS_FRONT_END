@@ -1,0 +1,141 @@
+:root {
+  --bg-color: #121214;
+  --accent-color: #ffffff;
+  --transition-speed: 2s;
+}
+
+.carousel-container {
+  font-family: system-ui, -apple-system, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.carousel-section {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+.carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-slide {
+  position: absolute;
+  width: 55%;
+  max-width: 650px;
+  height: 380px;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: 
+    transform var(--transition-speed) cubic-bezier(0.25, 1, 0.5, 1),
+    opacity var(--transition-speed) ease,
+    filter var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+  
+  opacity: 0;
+  transform: translateX(0) scale(0.6);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.carousel-slide.active {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  z-index: 10;
+  pointer-events: auto;
+  cursor: default;
+}
+
+.carousel-slide.prev {
+  opacity: 0.45;
+  transform: translateX(-65%) scale(0.8);
+  z-index: 5;
+  pointer-events: auto;
+  cursor: pointer;
+  filter: blur(1px);
+}
+
+.carousel-slide.next {
+  opacity: 0.45;
+  transform: translateX(65%) scale(0.8);
+  z-index: 5;
+  pointer-events: auto;
+  cursor: pointer;
+  filter: blur(1px);
+}
+
+.carousel-slide.prev:hover,
+.carousel-slide.next:hover {
+  opacity: 0.7;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  background: #173f35;
+  backdrop-filter: blur(8px);
+  border: 1px solid #28745a;
+  color: var(--accent-color);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-btn:hover {
+  background: #173f35a2;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.prev-btn {
+  left: 5%;
+}
+
+.next-btn {
+  right: 5%;
+}
+
+@media (max-width: 768px) {
+  .carousel-slide {
+    width: 75%;
+    height: 280px;
+  }
+  .carousel-slide.prev {
+    transform: translateX(-45%) scale(0.8);
+  }
+  .carousel-slide.next {
+    transform: translateX(45%) scale(0.8);
+  }
+}

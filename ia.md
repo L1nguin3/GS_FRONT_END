@@ -26,7 +26,7 @@ Assim, a IA serviu como apoio para aprender. O código do projeto foi montado, t
 | Entrega | Como usamos a IA | O que foi feito por nós |
 | --- | --- | --- |
 | Front-end (landing page, CSS) | Aprender conceitos de CSS e pedir pequenas linhas de código como referência | Estrutura da página, adaptação ao visual do projeto e testes no navegador |
-| Web Dev (JavaScript) | Treinar a lógica de programação e tirar dúvidas sobre as linhas do formulário de feedback | Escrita da função, testes e correção das linhas |
+| Web Dev (JavaScript) | Treinar a lógica de programação e tirar dúvidas sobre as linhas do formulário de feedback e do carrossel | Escrita da função, testes e correção das linhas |
 | Python (CLI) | Tirar dúvidas sobre os conceitos vistos em aula, como `def` e `match/case` | Montagem do programa e resolução dos exercícios da disciplina |
 
 ## CSS: o que aprendemos e aplicamos
@@ -44,9 +44,9 @@ Aprendemos CSS com a IA e aplicamos os conceitos na landing page, ajustando tudo
 | `:focus-visible` | Links usados pelo teclado | Deixar o foco visível, pensando em acessibilidade |
 | `transition` e `:hover` | Botões e links do menu | Dar retorno visual ao passar o mouse |
 
-## JavaScript: formulário de feedback
+## JavaScript: formulário de feedback e carrossel
 
-No JavaScript, treinamos a lógica de programação com perguntas e exercícios e depois corrigimos as linhas que precisavam de ajuste. O resultado é a função `enviarFeedback()`, em `js/script.js`, que roda quando a pessoa envia o formulário.
+No JavaScript, treinamos a lógica de programação com perguntas e exercícios e depois corrigimos as linhas que precisavam de ajuste. O resultado é a função `enviarFeedback()`, em `js/script.js`, que roda quando a pessoa envia o formulário, além das funções `updateCarousel()`, `nextSlide()`, `prevSlide()` e `resetAutoPlay()` que estão em `js/carousel.js`.
 
 O que entendemos de cada parte:
 
@@ -55,6 +55,7 @@ O que entendemos de cada parte:
 - O `return` dentro do `if` interrompe a função, então o agradecimento não aparece com campos vazios.
 - O `alert` final usa o nome digitado para personalizar a resposta.
 - O `reset()` limpa o formulário depois do envio.
+- O `setInterval()` define que uma função seja repetida em um intervalo definido em milisegundos.
 
 ## Nossa responsabilidade
 

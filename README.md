@@ -1,8 +1,14 @@
-# RAIZ 🌱
+<p align="center">
+  <img src="docs/logo.png" alt="Logo do RAIZ" width="100">
+</p>
 
-> Mais cuidado com a água. Mais força para cultivar.
+<h1 align="center">RAIZ</h1>
+
+<p align="center"><em>Mais cuidado com a água. Mais força para cultivar.</em></p>
 
 Landing page do **Projeto RAIZ**, desenvolvida pelo grupo **SONDER** para a Global Solution 2026.2 da FIAP (tema CitizenTech).
+
+![Página inicial do RAIZ](docs/home.png)
 
 ## Sobre o projeto
 
@@ -33,6 +39,7 @@ GS_FRONT_END/
 ├── css/styles.css   # estilos
 ├── js/script.js     # função enviarFeedback()
 ├── img/             # imagens das seções
+├── docs/            # logo e print usados no README
 ├── ia.md            # declaração de uso de IA
 └── INTEGRANTES.md
 ```

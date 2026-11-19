@@ -27,6 +27,7 @@ Assim, a IA serviu como apoio para aprender. O código do projeto foi montado, t
 | --- | --- | --- |
 | Front-end (landing page, CSS) | Aprender conceitos de CSS e pedir pequenas linhas de código como referência | Estrutura da página, adaptação ao visual do projeto e testes no navegador |
 | Web Dev (JavaScript) | Treinar a lógica de programação e tirar dúvidas sobre as linhas do formulário de feedback e do carrossel | Escrita da função, testes e correção das linhas |
+| MVP simulado (app) | Gerar o protótipo do aplicativo a partir das nossas instruções, declarado como feito por IA | Definição das telas, identidade visual, critérios de acessibilidade, mascotes, testes e publicação |
 | Python (CLI) | Tirar dúvidas sobre os conceitos vistos em aula, como `def` e `match/case` | Montagem do programa e resolução dos exercícios da disciplina |
 
 ## CSS: o que aprendemos e aplicamos
@@ -73,6 +74,27 @@ Usamos a IA para tirar dúvidas sobre como deixar a seção acessível e para re
 | Ordem de leitura | A ordem do HTML segue a ordem que aparece na tela | Leitores de tela leem na ordem do código |
 | CSS Grid com `auto-fit` | Cartões em 2×2 que viram 1 coluna e mascotes que quebram linha | Organizar em grade sem que os textos se sobreponham |
 
+## MVP simulado do aplicativo
+
+Diferente do resto do projeto, o MVP simulado (pasta `app/`) foi **gerado com inteligência artificial**, e isso está escrito no próprio protótipo: uma faixa no topo e no rodapé de todas as telas avisa que ele é um protótipo gerado por IA, com dados fictícios.
+
+O que foi feito pelo grupo:
+
+- Definimos as telas (Início, Canteiros, Histórico e Ajuda) e o que cada uma precisava mostrar.
+- Escrevemos as instruções para a IA com a identidade visual do RAIZ (paleta, fontes, cartões e botões) para o app seguir o mesmo visual da landing page.
+- Exigimos os mesmos critérios de acessibilidade da seção "Quatro caminhos para a mesma informação": número grande, alvo de toque de 44 px, leitura por voz, mascote com legenda, contraste, foco visível e informação que não depende só de cor.
+- Usamos as cinco expressões do mascote que nós desenhamos.
+- Testamos as quatro telas, o botão "Simular nova leitura", a leitura por voz e o layout no celular e no computador.
+- Publicamos o site e o app na Vercel e ligamos um ao outro: o botão "Ver o app" na landing page e o link "Voltar ao site" no app.
+
+| Recurso do app | Para que serve |
+| --- | --- |
+| `speechSynthesis` (Web Speech API) | Ler a situação do solo em voz alta, em português |
+| `<template>` com os mascotes | Trocar a expressão do mascote sem recarregar a página |
+| `hidden` e `aria-selected` nas abas | Mostrar uma tela por vez e avisar o leitor de tela qual está aberta |
+| `<details>` e `<summary>` | Esconder o gráfico técnico até a pessoa pedir |
+| `prefers-reduced-motion` | Tirar animações para quem configurou isso no sistema |
+
 ## Nossa responsabilidade
 
 - Só usamos um trecho depois de entender como ele funciona.
@@ -83,6 +105,6 @@ Usamos a IA para tirar dúvidas sobre como deixar a seção acessível e para re
 
 ## Considerações finais
 
-Usamos a IA para aprender e tirar dúvidas de CSS, JavaScript e Python. O projeto, as decisões e o código final são trabalho do grupo SONDER.
+Usamos a IA para aprender e tirar dúvidas de CSS, JavaScript e Python, e para gerar o MVP simulado do aplicativo, que está identificado como protótipo feito por IA. O projeto, as decisões, a landing page e o conteúdo são trabalho do grupo SONDER.
 
 **Grupo SONDER** · Global Solution 2026.2 · FIAP

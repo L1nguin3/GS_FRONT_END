@@ -8,7 +8,7 @@
 
 Landing page do **Projeto RAIZ**, desenvolvida pelo grupo **SONDER** para a Global Solution 2026.2 da FIAP (tema CitizenTech).
 
-![Página inicial do RAIZ](docs/home.jpg)
+![Página inicial do RAIZ](docs/home.png)
 
 ## Sobre o projeto
 
